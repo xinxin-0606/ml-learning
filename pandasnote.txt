@@ -1,0 +1,69 @@
+Pandas 数据清洗
+├── 1. 数据概览（了解数据）
+│   ├── info() - 数据结构
+│   ├── describe() - 统计信息
+│   ├── head() / tail() - 查看数据
+│   └── shape / columns - 基本属性
+│
+├── 2. 缺失值处理（填补空白）
+│   ├── isnull() / notnull() - 检测缺失
+│   ├── fillna() - 填充缺失
+│   │   ├── 均值填充（数值列）
+│   │   ├── 中位数填充（稳健）
+│   │   ├── 众数填充（分类列）
+│   │   └── ffill / bfill（前后填充）
+│   └── dropna() - 删除缺失行
+│
+├── 3. 异常值处理（去伪存真）
+│   ├── IQR方法（四分位距）
+│   │   ├── Q1（25%分位）
+│   │   ├── Q3（75%分位）
+│   │   └── 1.5×IQR 规则
+│   ├── 检测：quantile()
+│   ├── 修正：clip() / 替换
+│   └── 删除：布尔索引
+│
+├── 4. 日期处理（统一时间）
+│   ├── pd.to_datetime() - 统一格式
+│   ├── errors='coerce' - 容错处理
+│   ├── dt.year / month / day - 提取信息
+│   └── dt.day_name() - 星期几
+│
+├── 5. 重复值处理（去重）
+│   ├── duplicated() - 检测重复
+│   │   ├── keep='first'（默认）
+│   │   ├── keep='last'
+│   │   └── keep=False（全部标记）
+│   └── drop_duplicates() - 删除重复
+│       └── subset - 指定列去重
+│
+├── 6. 字符串处理（文本清洗）
+│   ├── str.split() - 分割
+│   ├── str.replace() - 替换
+│   ├── str.contains() - 包含判断
+│   ├── str.upper() / lower() - 大小写
+│   └── str.strip() - 去除空格
+│
+├── 7. 分组聚合（数据汇总）
+│   ├── groupby() - 分组
+│   ├── agg() - 多聚合函数
+│   ├── 多级分组
+│   └── 分组排序
+│
+├── 8. 数据透视表（报表生成）
+│   ├── pivot_table() - 透视表
+│   │   ├── values - 值列
+│   │   ├── index - 行标签
+│   │   ├── columns - 列标签
+│   │   ├── aggfunc - 聚合函数
+│   │   ├── fill_value - 填充空值
+│   │   └── margins - 汇总行
+│   └── 多级索引透视
+│
+└── 9. 数据合并（表关联）
+    ├── merge() - 类似SQL JOIN
+    │   ├── how='inner'（内连接）
+    │   ├── how='left'（左连接）
+    │   ├── how='right'（右连接）
+    │   └── how='outer'（外连接）
+    └── on - 连接键

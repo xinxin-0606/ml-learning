@@ -30,8 +30,6 @@ print("原始销售数据：", sales)
 sales_clean = sales.copy()
 mask_outlier = sales > 1000
 sales_clean[mask_outlier] = (np.roll(sales,1)[mask_outlier] + np.roll(sales,-1)[mask_outlier]) / 2
-#np.roll(sales,1)[i] = i 位置左边相邻的值
-#np.roll(sales,-1)[i] = i 位置右边相邻的值
 print("题目1: 替换>1000异常值后：", sales_clean)
 
 # 题目2: 找出数据中 <= 0 的无效值，替换为该列的中位数
@@ -74,6 +72,8 @@ print(f"题目6 最高收益率索引:{max_return_idx}, 最低收益率索引:{m
 # 题目7: 波动率（收益率标准差）
 volatility = np.std(returns)
 print(f"题目7 波动率：{volatility:.4f}")
+
+
 # ════════════════════════════════════════════════════════════
 # 第三关：图像处理基础（计算机视觉入门）
 # ════════════════════════════════════════════════════════════
@@ -143,15 +143,11 @@ max_total_idx = np.argmax(total_scores)
 print(f"题目14 总分最高学生索引：{max_total_idx}")
 
 # 题目15: >=90分位置
-# 课程编号→课程名称
-course_map = {0:"语文", 1:"数学", 2:"英语"}
+high_scores = np.where(scores >= 90)
+print("\n题目15 90分以上坐标(学生,课程)：")
+for row,col in zip(*high_scores):
+    print(f"学生{row},课程{col},分数={scores[row,col]}")
 
-high_scores = np.where(scores >= 90)#返回两个索引数组
-
-for row, col in zip(*high_scores):
-    score_val = scores[row, col]
-    course_name = course_map[col]
-    print(f"学生{row} {course_name} {score_val}分")
 # 题目16: Z-score标准化【按列（每门课程）标准化】
 mean_sub = np.mean(scores, axis=0)
 std_sub = np.std(scores, axis=0)
@@ -218,11 +214,11 @@ print(A)
 
 U, S, Vt = np.linalg.svd(A)
 # 保留前2个奇异值
-S2 = np.zeros_like(S)#创建一个和s一样大的一维数组
-S2[:2] = S[:2]#取前两个
-Sigma2 = np.zeros((4,4))#创建一个4x4的零矩阵
-np.fill_diagonal(Sigma2, S2)#s2填入
-A_approx = U @ Sigma2 @ Vt#重构矩阵
+S2 = np.zeros_like(S)
+S2[:2] = S[:2]
+Sigma2 = np.zeros((4,4))
+np.fill_diagonal(Sigma2, S2)
+A_approx = U @ Sigma2 @ Vt
 print("\n题目21 保留前2奇异值近似矩阵：")
 print(np.round(A_approx,2))
 
